@@ -36,7 +36,7 @@ class HelpFormatter(commands.HelpFormatter):
 		command_name = self.context.invoked_with
 		return (
 			"Type `{0}{1}` command for more info on a command.\n"
-			"You can also type `{0}{1}` category for more info on a category.".format(self.clean_prefix, command_name))
+			"You can also type `{0}{1} category` for more info on a category.".format(self.clean_prefix, command_name))
 
 	def _add_subcommands_to_page(self, max_width, commands):
 		for name, command in commands:

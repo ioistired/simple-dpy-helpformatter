@@ -57,10 +57,7 @@ class HelpFormatter(commands.HelpFormatter):
 		"""
 		self._paginator = commands.Paginator(prefix='', suffix='')
 
-		description = (
-			self.command.description and f'*{self.command.description}*'
-			if not self.is_cog()
-			else inspect.getdoc(self.command))
+		description = self.command.description if not self.is_cog() else inspect.getdoc(self.command)
 
 		if description:
 			# <description> portion

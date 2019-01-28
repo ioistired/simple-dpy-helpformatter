@@ -24,6 +24,7 @@
 # SOFTWARE.
 
 import inspect
+import itertools
 
 from discord.ext import commands
 
@@ -54,9 +55,6 @@ class HelpFormatter(commands.HelpFormatter):
 		list
 			A paginated output of the help command.
 		"""
-		# XXX UnboundedLocalError if we don't do this??
-		# but if i do discord.ext.commands without `global commands` it works???
-		global commands
 		self._paginator = commands.Paginator(prefix='', suffix='')
 
 		description = (
@@ -93,13 +91,13 @@ class HelpFormatter(commands.HelpFormatter):
 		filtered = await self.filter_command_list()
 		if self.is_bot():
 			data = sorted(filtered, key=category)
-			for category, commands in itertools.groupby(data, key=category):
+			for category, category_commands in itertools.groupby(data, key=category):
 				# there simply is no prettier way of doing this.
-				commands = sorted(commands)
-				if len(commands) > 0:
+				category_commands = sorted(category_commands)
+				if len(category_commands) > 0:
 					self._paginator.add_line(category)
 
-				self._add_subcommands_to_page(max_width, commands)
+				self._add_subcommands_to_page(max_width, category_commands)
 		else:
 			filtered = sorted(filtered)
 			if filtered:

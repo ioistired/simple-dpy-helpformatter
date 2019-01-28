@@ -2,6 +2,12 @@
 
 A HelpFormatter for discord.ext.commands that is marginally better than the default.
 
+## Installation
+
+1. Add `simple_help_formatter @ git+https://github.com/bmintz/simple-dpy-helpformatter` to your requirements.txt or setup.py file.
+2. When you initialize your commands.Bot, add `formatter=simple_help_formatter.HelpFormatter()` to the kwargs.
+   You can also do `bot.formatter = simple_help_formatter.HelpFormatter()`.
+
 ## Sample output
 
 Here's the output of various help commands for a bot of mine.
